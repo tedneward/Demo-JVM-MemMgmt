@@ -5,9 +5,10 @@
  */
 package com.newardassociates.demo;
 
-import java.lang.ref.Cleaner;
 
 // {{## BEGIN simple-cleaner ##}}
+import java.lang.ref.Cleaner;
+
 public class SimpleCleaner {
     private static final Cleaner CLEANER = Cleaner.create();
     public SimpleCleaner() {
@@ -18,9 +19,7 @@ public class SimpleCleaner {
         SimpleCleaner app = new SimpleCleaner();
         app = null;
 
-        System.gc();
-            // On most systems, this should be sufficient
-            // to trigger the cleanup.
+        System.gc(); // On most systems, this should trigger cleanup.
     }
 }
 // {{## END simple-cleaner ##}}
