@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -24,7 +25,7 @@ public class App {
      * enough number of CHUNKS, you'll force an OutOfMemoryError
      * and terminate the JVM.
      */
-    public static void createMemoryPressure() {
+    public static List<Object> createMemoryPressure() {
         System.out.println("Creating memory pressure");
 
         // You may need to toy with this number below depending on your JVM
@@ -33,6 +34,17 @@ public class App {
         int CHUNKS = 40;
         List<Object> unused = new ArrayList<Object>();
         for (int i=0; i<CHUNKS; i++) { unused.add(new byte[100_000]); }
+        return unused;
+    }
+
+    /**
+     * Demonstrate running out of memory
+     */
+    public static void runMemory() {
+        List<Object> captured = new LinkedList<Object>();
+        while (true) {
+            captured.addAll(createMemoryPressure());
+        }
     }
 
     /**
@@ -290,10 +302,11 @@ public class App {
     }
 
     public static void main(String[] args) {
+        runMemory();
         //softRefs();
         //softRefsWithQueue();
         //weakRefs();
-        weakRefsWithQueue();
+        //weakRefsWithQueue();
         //weakVsSoft();
         //phantomRefsWithQueue();
     }
