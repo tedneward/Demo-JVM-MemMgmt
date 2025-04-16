@@ -41,6 +41,7 @@ public class App {
      * Demonstrate running out of memory
      */
     public static void runMemory() {
+        System.out.println("Starting generate-an-OOMError demo");
         List<Object> captured = new LinkedList<Object>();
         while (true) {
             captured.addAll(createMemoryPressure());
